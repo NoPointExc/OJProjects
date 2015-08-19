@@ -1,0 +1,5 @@
+time: O(n^2)
+follw the method we learn from primary school. 
+ 1)multiplay bit by bit
+ 2)shift result of one bit and add with the result of the following bit.
+ *all intermediate value is record in reversed order. E.g, inter-value "321" stands for "123"

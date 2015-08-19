@@ -1,0 +1,20 @@
+//{1,3],[2,6],[8,10],[15,18]
+import java.util.*;
+class Test{
+	public static void main(String[] args){
+		
+		int[][] arr={{3,4},{2,5},{1,3},{4,7},{7,4},{2,8},{6.1};
+		List<Interval> intervals=new ArrayList<Interval> ();
+		for(int i=0;i<arr.length;i++){
+			Interval tmp=new Interval(arr[i][0],arr[i][1]);
+			intervals.add(tmp);
+		}
+		Solution s=new Solution();
+		List<Interval> ans=s.merge(intervals);
+		//s.swap(intervals,0,1);
+		//s.quickSort(intervals,0,intervals.size());
+		for(Interval it:intervals){
+			System.out.println("["+it.start+","+it.end+"]");
+		}
+	}
+}
