@@ -1,0 +1,5 @@
+spc=11, wdNum=3;
+
+"This    is    an",
+   "example  of text",
+   "justification.  "
