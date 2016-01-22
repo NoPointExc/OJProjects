@@ -11,11 +11,8 @@ public class Solution {
         return buildTree(0,preorder.length-1,0);
     }
 
-    private TreeNode buildTree(int head,int tail,int rootPos){
-        //System.out.println("head="+preorder[head]+", tail="+preorder[tail]+" root="+inorder[rootPos]);
-        if(rootPos>=preorder.length || rootPos<0 || head>tail) return null;
-        //System.out.println("head="+inorder[head]+", tail="+inorder[tail]+" root="+preorder[rootPos]);
-      
+    private TreeNode buildTree(int head,int tail,int rootPos){        
+        if(rootPos>=preorder.length || rootPos<0 || head>tail) return null;        
         TreeNode root=new TreeNode(preorder[rootPos]);
         if(head==tail) return root;
         int mid=map.get(preorder[rootPos]);

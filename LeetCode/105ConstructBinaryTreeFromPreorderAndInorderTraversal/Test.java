@@ -7,10 +7,3 @@ class Test{
 		//s.travel(root);
 	}
 }
-
-/*
- 1 
-
- if preorder==inorder: nextCur=stack.pop, j++
- else cur.next=preorder, nextcue=cur.next
- */
