@@ -1,0 +1,5 @@
+*.out
+*.exe
+*.jar
+*.class
+*.gch
