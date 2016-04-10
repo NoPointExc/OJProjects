@@ -24,7 +24,7 @@ int numDistinct(char* s, char* t) {
 			if(s[is]==t[it]) arr[it][is]+=arr[it-1][is-1];			
 		}
 	}
-
+	free(arr);
 	return arr[len_t-1][len_s-1];
 }
 
