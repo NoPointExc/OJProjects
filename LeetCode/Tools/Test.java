@@ -2,7 +2,8 @@ import java.util.*;
 
 class Test{
 	public static void main(String[] args) {
-		String str="[1,-2,-3,1,3,-2,null,-1]";
+		String str="[1,2,3,4,null,null,5]";
+		
 		TreeNode root = TreeBuilder.create(str);
 		//TreeNode root=null;
 		// TreeNode root=new TreeNode(1);
