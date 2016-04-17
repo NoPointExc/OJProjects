@@ -5,11 +5,18 @@ public class Solution {
 	private static InputReader in;
 	private static PrintWriter out;
 	public static boolean SUBMIT = true;
-	//public static final String NAME = "A-small-practice";
-	public static final String NAME = "A-large-practice";
+	//public static final String NAME = "B-small-practice";
+	public static final String NAME = "B-large-practice";
 
 	private static void main2() throws IOException {
-		
+		String str=in.nextLin();
+		String[] arr=str.split(" ");
+		StringBuilder sb=new StringBuilder();
+		for(int i=arr.length-1;i>=0;i--){
+			sb.append(arr[i]);
+			if(i!=0) sb.append(" ");
+		}
+		out.println(sb.toString());
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -41,6 +48,16 @@ public class Solution {
 			tokenizer = null;
 		}
 
+		public String nextLin(){
+			String line=null;
+			try{
+				line=reader.readLine();
+			}catch(IOException e){
+				throw new RuntimeException(e);
+			}
+			return line;
+		}
+
 		public String next() {
 			while (tokenizer == null || !tokenizer.hasMoreTokens()) {
 				try {
@@ -54,16 +71,6 @@ public class Solution {
 
 		public int nextInt() {
 			return Integer.parseInt(next());
-		}
-
-		public String nextLin(){
-			String line=null;
-			try{
-				line=reader.readLine();
-			}catch(IOException e){
-				throw new RuntimeException(e);
-			}
-			return line;
 		}
 	}
 
