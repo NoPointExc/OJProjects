@@ -2,69 +2,45 @@ import java.io.*;
 import java.util.*;
 
 public class Solution {
-	private static InputReader in;
+	private static String fileName = "A-large-practice";
+	private static String fileName = "A-small-practice";	
+	private static String inputFileName = fileName + ".in";
+	private static String outputFileName = fileName + ".out";
+	private static Scanner in;
 	private static PrintWriter out;
-	public static boolean SUBMIT = true;
-	//public static final String NAME = "A-small-practice";
-	public static final String NAME = "A-large-practice";
 
-	private static void main2() throws IOException {
-		
+	private void solve() {
+		int n = in.nextInt();
+		int[] a = new int[n];
+		int[] b = new int[n];
+		int ans = 0;
+		for (int i = 0; i < n; i++) {
+			a[i] = in.nextInt();
+			b[i] = in.nextInt();
+			for (int j = 0; j < i; j++) {
+				if ((a[i] > a[j]) ^ (b[i] > b[j])) {
+					ans++;
+				}
+			}
+		}
+		out.println(ans);
 	}
 
 	public static void main(String[] args) throws IOException {
-			
-		if (SUBMIT) {
-			in = new InputReader(new FileInputStream(new File(NAME + ".in")));
-			out = new PrintWriter(new BufferedWriter(new FileWriter(NAME + ".out")));
-		} else {			
-			in = new InputReader(System.in);
-			out = new PrintWriter(System.out, true);
+		Locale.setDefault(Locale.US);
+		if (args.length >= 2) {
+			inputFileName = args[0];
+			outputFileName = args[1];
 		}
-
-		int numCases = in.nextInt();
-		for (int test = 1; test <= numCases; test++) {
-			out.print("Case #" + test + ": ");
-			main2();
+		in = new Scanner(new FileReader(inputFileName));
+		out = new PrintWriter(outputFileName);
+		int tests = in.nextInt();
+		in.nextLine();
+		for (int t = 1; t <= tests; t++) {
+			out.print("Case #" + t + ": ");
+			new A().solve();
 		}
-
+		in.close();
 		out.close();
-		System.exit(0);
 	}
-
-	static class InputReader {
-		public BufferedReader reader;
-		public StringTokenizer tokenizer;
-
-		public InputReader(InputStream stream) {
-			reader = new BufferedReader(new InputStreamReader(stream), 32768);
-			tokenizer = null;
-		}
-
-		public String next() {
-			while (tokenizer == null || !tokenizer.hasMoreTokens()) {
-				try {
-					tokenizer = new StringTokenizer(reader.readLine());
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
-			}
-			return tokenizer.nextToken();
-		}
-
-		public int nextInt() {
-			return Integer.parseInt(next());
-		}
-
-		public String nextLin(){
-			String line=null;
-			try{
-				line=reader.readLine();
-			}catch(IOException e){
-				throw new RuntimeException(e);
-			}
-			return line;
-		}
-	}
-
 }
