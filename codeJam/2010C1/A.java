@@ -1,60 +1,40 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.*;
 import java.util.*;
 
-public class Solution {
+public class A {
 	private static InputReader in;
 	private static PrintWriter out;
 	public static boolean SUBMIT = true;
 	//public static final String NAME = "A-small-practice";
 	public static final String NAME = "A-large-practice";
 
-	public static int textNum=0;
-	public static int textLen=0;
-	public static String[] texts;
-	private static void main2() throws IOException {
-		int matchNum=textNum;
-		boolean[] isMatch=new boolean[textNum];
-		for(int i=0;i<textNum;i++){
-			isMatch[i]=true;
-		}
-		String patternStr=in.nextLin();
-
-		for(int i=0;i<textNum;i++){
-			int p=0;
-			String text=texts[i];
-			boolean option=false;
-			boolean jump=false;
-			for(int j=0;j<patternStr.length();j++){
-				char cur=patternStr.charAt(j);
-				if(cur=='('){
-					option=true;
-					jump=false;
-					continue;//jump to next char
-				}else if(cur==')'){
-					option=false;
-					if(!jump) {
-						matchNum--;
-						break;
-					}else{
-						p++;
- 	                    continue;
-					}
-				}
-				if(option){
-					jump=jump||text.charAt(p)==cur;	
-				}else{
-					if(text.charAt(p)!=cur){
-						matchNum--;
-						break;//jump to next text
-					}
-					p++;//text.charAt P = cur
-				}
-			}
-			
-		}
-		out.println(matchNum);
-	}
+        static void main2() throws IOException {
+                int linNum=in.nextInt();
+                int[][] pos=new int[linNum][2];
+		HashSet<List> set=new HashSet<>();
+                for(int i=0;i<linNum;i++ ){
+                        pos[i][0]=in.nextInt();
+                        pos[i][1]=in.nextInt();
+                }
+                //calculate all inter points.
+                for(int i=0;i<linNum;i++){
+                        double a0=(double)pos[i][0];
+                        double b0=(double)pos[i][1];
+                        for(int j=i+1;j<linNum;j++){
+                                double a1=(double)pos[j][0];
+                                double b1=(double)pos[j][1];
+								double x=(a0-a1)/(b1-b0+a0-a1);
+								double y=x*(b0-a0)+a0;
+								double [] itPoint={x,y};
+								//System.out.println("a0"+a0+" b0"+b0+"  ;a1"+a1+" b1"+b1+"  ;x="+x+" y="+y);
+								if(x>0 && x<1){
+									set.add(Arrays.asList(itPoint));
+								}
+                        }
+                }
+				out.println(set.size());
+        }
+		
 
 	public static void main(String[] args) throws IOException {
 			
@@ -65,14 +45,8 @@ public class Solution {
 			in = new InputReader(System.in);
 			out = new PrintWriter(System.out, true);
 		}
-		textLen=in.nextInt();		
-		textNum=in.nextInt();
+
 		int numCases = in.nextInt();
-		//save all texts
-		texts=new String[textNum];
-		for(int i=0;i<textNum;i++){
-			texts[i]=in.nextLin();
-		}
 		for (int test = 1; test <= numCases; test++) {
 			out.print("Case #" + test + ": ");
 			main2();

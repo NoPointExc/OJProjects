@@ -1,22 +1,15 @@
 #bash!/bin/bash
-FILE_NAME=$1
-# if [ -d "&FILE_NAME" ]; then
-	
-# 	echo 'File &FILE_NAME already exist:'
-# 	exit 0
-	# options=("Y" "N")
-	# select opt in "${options[@]}" 
-	# do 
-	# 	case $opt in
-	# 		Y ) 
-	# 			rm -rf &FILE_NAME
-	# 			;;
-		
-	# 		*) 
-	# 			exit 0
-	# 			;;
-	# 	esac
-# fi
-mkdir $FILE_NAME
-cp ~/OJProjects/codeJam/zyg/* ~/OJProjects/codeJam/$FILE_NAME
+DIR_NAME=$1
+
+# mkdir $FILE_NAME
+# cp ./zyg/* ./$FILE_NAME
+# cd ./$FILE_NAME
+# echo "DOWNLOAD INPUT FILES BY HANDS, good luch"
+
+if [ ! -d $DIR_NAME ]; then
+    mkdir $DIR_NAME
+fi
+cp ./zyg/* ./$DIR_NAME
+cd ./$DIR_NAME
 echo "DOWNLOAD INPUT FILES BY HANDS, good luch"
+

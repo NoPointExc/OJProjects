@@ -1,105 +1,120 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.Arrays;
+import java.util.*;
 
-public class A implements Runnable {
+public class A {
+	private static InputReader in;
+	private static PrintWriter out;
+	public static boolean SUBMIT = true;
+	//public static final String NAME = "A-small-practice";
+	public static final String NAME = "A-large-practice";
 
-	BufferedReader in;
-	BufferedWriter out;
-	static String inputFile = "";
-	static String outputFile = "";
-	
-	static {
-		inputFile = A.class.getName() + ".in";
-		outputFile = A.class.getName() + ".out";
-	}
-	
-	public int iread() throws Exception {
-		return Integer.parseInt(readword());
-	}
-	
-	public double dread() throws Exception {
-		return Double.parseDouble(readword());
-	}
-	
-	public long lread() throws Exception {
-		return Long.parseLong(readword());
-	}
-	
-	public String readword() throws Exception {
-		int c = in.read();
-		while( c >= 0 && c <= ' ' ) {
-			c = in.read();
+	public static int textNum=0;
+	public static int textLen=0;
+	public static String[] texts;
+	private static void main2() throws IOException {
+		int matchNum=textNum;
+		boolean[] isMatch=new boolean[textNum];
+		for(int i=0;i<textNum;i++){
+			isMatch[i]=true;
 		}
-		if( c < 0 ) return "";
-		StringBuilder bld = new StringBuilder();
-		while( c > ' ' ) {
-			bld.append((char)c);
-			c = in.read();
-		}
-		return bld.toString();
-	}
-	
-	public void solve() throws Exception {
-		int len = iread();
-		int n = iread();
-		int tests = iread();
-		String words[] = new String[n];
-		for( int i = 0; i < n; i++) {
-			words[i] = readword();
-		}
-		for( int i = 0; i < tests; i++) {
-			boolean cand[] = new boolean[n];
-			Arrays.fill(cand,true);
-			String pat = readword();
-			int curPos = 0;
-			for( int j = 0; j < len; j++) {
-				String match = "";
-				if( pat.charAt(curPos) == '(') {
-					int temp = curPos + 1;
-					while( pat.charAt(temp) != ')') {
-						temp++;
+		String patternStr=in.nextLin();
+
+		for(int i=0;i<textNum;i++){
+			int p=0;
+			String text=texts[i];
+			boolean option=false;
+			boolean jump=false;
+			for(int j=0;j<patternStr.length();j++){
+				char cur=patternStr.charAt(j);
+				if(cur=='('){
+					option=true;
+					jump=false;
+					continue;//jump to next char
+				}else if(cur==')'){
+					option=false;
+					if(!jump) {
+						matchNum--;
+						break;
+					}else{
+						p++;
+ 	                    continue;
 					}
-					match = pat.substring(curPos+1, temp);
-					curPos = temp + 1;
-				} else {
-					match = "" + pat.charAt(curPos);
-					curPos++;
 				}
-				for( int t = 0; t < n; t++) {
-					boolean flag = false;
-					for( int k = 0; k < match.length(); k++) {
-						if( words[t].charAt(j) == match.charAt(k)) flag = true;
+				if(option){
+					jump=jump||text.charAt(p)==cur;	
+				}else{
+					if(text.charAt(p)!=cur){
+						matchNum--;
+						break;//jump to next text
 					}
-					cand[t] = cand[t] & flag;
+					p++;//text.charAt P = cur
 				}
 			}
-			int result = 0;
-			for( int j = 0; j < words.length; j++) {
-				if( cand[j] ) result++;
+			
+		}
+		out.println(matchNum);
+	}
+
+	public static void main(String[] args) throws IOException {
+			
+		if (SUBMIT) {
+			in = new InputReader(new FileInputStream(new File(NAME + ".in")));
+			out = new PrintWriter(new BufferedWriter(new FileWriter(NAME + ".out")));
+		} else {			
+			in = new InputReader(System.in);
+			out = new PrintWriter(System.out, true);
+		}
+		textLen=in.nextInt();		
+		textNum=in.nextInt();
+		int numCases = in.nextInt();
+		//save all texts
+		texts=new String[textNum];
+		for(int i=0;i<textNum;i++){
+			texts[i]=in.nextLin();
+		}
+		for (int test = 1; test <= numCases; test++) {
+			out.print("Case #" + test + ": ");
+			main2();
+		}
+
+		out.close();
+		System.exit(0);
+	}
+
+	static class InputReader {
+		public BufferedReader reader;
+		public StringTokenizer tokenizer;
+
+		public InputReader(InputStream stream) {
+			reader = new BufferedReader(new InputStreamReader(stream), 32768);
+			tokenizer = null;
+		}
+
+		public String next() {
+			while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+				try {
+					tokenizer = new StringTokenizer(reader.readLine());
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 			}
-			out.write("Case #" + (i+1) + ": " + result + "\n");
+			return tokenizer.nextToken();
 		}
-	}
-	
-	public void run() {
-		try {
-			in = new BufferedReader( new FileReader( inputFile ));
-			out = new BufferedWriter( new FileWriter( outputFile ));
-//			in = new BufferedReader( new InputStreamReader(System.in));
-//			out = new BufferedWriter( new OutputStreamWriter(System.out));
-			solve();
-			out.flush();
-		} catch( Exception e ) {
-			e.printStackTrace();
+
+		public int nextInt() {
+			return Integer.parseInt(next());
 		}
-	}
-	public static void main(String[] args) {
-		new Thread( new A()).start();
+
+		public String nextLin(){
+			String line=null;
+			try{
+				line=reader.readLine();
+			}catch(IOException e){
+				throw new RuntimeException(e);
+			}
+			return line;
+		}
 	}
 
 }

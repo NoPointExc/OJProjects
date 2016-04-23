@@ -1,27 +1,16 @@
 import java.io.*;
 import java.util.*;
 
-public class Solution {
-	private static String fileName = "B-large-practice";
-	//private static String fileName = "B-small-practice";	
+public class A {
+	//private static String fileName = "A-large-practice";
+	private static String fileName = "A-small-practice";	
 	private static String inputFileName = fileName + ".in";
 	private static String outputFileName = fileName + ".out";
 	private static Scanner in;
 	private static PrintWriter out;
 
-	private static void  solve() {
-		long l=in.nextLong();
-		long p=in.nextLong();
-		long c=in.nextLong();
-		//System.out.println(l+";"+p+";"+c);
-		int ans=0;
+	private void solve() {
 
-		while(l<p){
-			ans++;
-			l=l*c;
-		}
-		ans=32-Integer.numberOfLeadingZeros(ans-1);	
-		out.println(ans);
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -36,7 +25,7 @@ public class Solution {
 		in.nextLine();
 		for (int t = 1; t <= tests; t++) {
 			out.print("Case #" + t + ": ");
-			solve();
+			new A().solve();
 		}
 		in.close();
 		out.close();
