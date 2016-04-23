@@ -1,4 +1,5 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.util.*;
 
 public class Solution {
@@ -41,8 +42,7 @@ public class Solution {
 					}
 				}
 				if(option){
-					jump=jump||text.charAt(p)==cur;
-			
+					jump=jump||text.charAt(p)==cur;	
 				}else{
 					if(text.charAt(p)!=cur){
 						matchNum--;
