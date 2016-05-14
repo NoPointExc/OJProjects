@@ -36,32 +36,35 @@ public class B {
 
 	private int minMalted(int from,int[] milk,boolean[] isHappy){
 		if(from==milk.length){
+			for(int i=0;i<isHappy.length;i++){
+				if(!isHappy[i]) return -1;
+			}
 			return 0;
 		}
 		boolean mayMalted=false;
 		
 		//UN-Malted
-		boolean[] isHappyTmp=Array.copyOf(isHappy,isHappy.length);
-		int[] milkTmp=Array.copyOf(milk,milk.length);
+		boolean[] isHappyTmp=Arrays.copyOf(isHappy,isHappy.length);
+		int[] milkTmp=Arrays.copyOf(milk,milk.length);
 		//ask every customer && try unmalted
 		for(int i=0;i<cust;i++){
 			//not happy & like malted
 			if(!isHappy[i]){
-				if(choice[from,i]==0){
+				if(choice[from][i]==0){
 					isHappyTmp[i]=true;
 				}else{
 					mayMalted=true;
 				}
 			}
 		}
-		int[] milkTmp=Array.copyOf(milk,milk.length);
+		//int[] milkTmp=Arrays.copyOf(milk,milk.length);
 		int rst=minMalted(from+1,milkTmp,isHappyTmp);
 		
 		//MALTED
-		if(maymalted){
-			int[] milkMal=Array.copyOf(milk,milk.length);
+		if(mayMalted){
+			int[] milkMal=Arrays.copyOf(milk,milk.length);
 			milkMal[from]=1;
-			boolean isHappyMal[]=Array.copyOf(isHappy,isHappy.length);
+			boolean isHappyMal[]=Arrays.copyOf(isHappy,isHappy.length);
 			//ask every customer if become happy
 			for(int i=0;i<isHappy.length;i++){
 				if(!isHappy[i]&&choice[from][i]==1){
@@ -69,7 +72,7 @@ public class B {
 				}
 			}
 			int rstMal=minMalted(from+1,milkMal,isHappyMal);
-			rst=rst<rstMal?rst:rstMal;
+			if(rst>0 && rst>rstMal) rst=rstMal;
 		}
 		
 		return rst;	
