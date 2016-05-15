@@ -9,72 +9,126 @@ public class B {
 	private static Scanner in;
 	private static PrintWriter out;
 	
-	int[][] choice;
-	int cust;
 	private void solve() {
-		int flavor=in.nextInt();
-		cust=in.nextInt();
-		boolean[] isHappy=new boolean[cust];
-		Arrays.fill(isHappy,false);
-		int[] milk=new int[flavor];
-		Arrays.fill(milk,0);
-		choice=new int[flavor][cust];
-		for(int i=0;i<flavor;i++){
-			Arrays.fill(choice[i],-1);//-1 don't care 
+		int flvNum=in.nextInt();
+		int ctmNum=in.nextInt();
+	
+		int[] flvs=new int[flvNum];
+		for(int i=0;i<flvs.length;i++){
+			flvs[i]=i+1;
 		}
-		//get solution
-		int rst=minMalted(0,milk,isHappy);
-		if(rst==-1){
-			out.println("IMPOSSIBLE");
-		}else{
-			for(int i=0;i<flavor;i++){
-				out.print(milk[i]+" ");
+
+		ArrayList<Customer> ctms=new ArrayList<Customer>();
+		//System.out.println("flvNUm:"+flvNum+" ctmNum:"+ctmNum+" ctms:"+ctms);
+		for(int i=0;i<ctmNum;i++){
+			int wtNum=in.nextInt();
+			Customer ctm=new Customer();
+			//System.out.println("wtNum:"+wtNum);
+			for(int j=0;j<wtNum;j++){
+				int flavor=in.nextInt();
+				int isMalt=in.nextInt()==0?-1:1; //-1 indicates umalted, 1 indicates malted
+				ctm.want(flavor*isMalt);	
+			}
+			ctms.add(ctm);
+		}
+		
+		int[] menu=Arrays.copyOf(flvs,flvs.length);
+		int rst=setMenu(0,menu,ctms);	
+		
+		if(rst!=-1){
+			for(int i=0;i<menu.length;i++){
+				int tmp=menu[i]>0?1:0;
+				out.print(tmp+" ");
 			}
 			out.println();
-		}			
+		}else{
+			out.println("IMPOSSIBLE");
+		}	
+					
 	}
 
-	private int minMalted(int from,int[] milk,boolean[] isHappy){
-		if(from==milk.length){
+	private int setMenu(int from,int[] menu,ArrayList<Customer> ctms){
+		if(ctms.size()==0){
 			return 0;
 		}
-		boolean mayMalted=false;
+		if(from==menu.length){
+			return -1;	
+		}
+		// try malted
+		int[] menuTmp0=Arrays.copyOf(menu,menu.length);
+		ArrayList<Customer> ctmsTmp0=copyCtms(ctms);
+		Iterator<Customer> it=ctmsTmp0.iterator();
+		while(it.hasNext()){
+			Customer cur=it.next();
+			boolean isDrink=cur.drink(menuTmp0[from]);
+			if(isDrink) it.remove();
+		}
+		int rst0=setMenu(from+1,menuTmp0,ctmsTmp0);//need to +1 latter
 		
-		//UN-Malted
-		boolean[] isHappyTmp=Array.copyOf(isHappy,isHappy.length);
-		int[] milkTmp=Array.copyOf(milk,milk.length);
-		//ask every customer && try unmalted
-		for(int i=0;i<cust;i++){
-			//not happy & like malted
-			if(!isHappy[i]){
-				if(choice[from,i]==0){
-					isHappyTmp[i]=true;
-				}else{
-					mayMalted=true;
-				}
+		//try un-malted
+		int[] menuTmp1=Arrays.copyOf(menu,menu.length);
+		menuTmp1[from]=-menuTmp1[from];
+		ArrayList<Customer> ctmsTmp1=copyCtms(ctms);
+		it=ctmsTmp1.iterator();
+		while(it.hasNext()){
+			Customer cur=it.next();
+			boolean isDrink=cur.drink(menuTmp1[from]);
+			if(isDrink) it.remove();
+		}
+		int rst1=setMenu(from+1,menuTmp1,ctmsTmp1);
+		
+		int rst=-1;
+		if(rst0==-1){
+			rst=rst1;
+		}else if(rst1==-1){
+			rst=rst1;
+		}else{
+			if(rst0<rst1){
+				rst=rst0+1;
+			}else{
+				rst=rst1;
+				menu[from]*=-1;
 			}
 		}
-		int[] milkTmp=Array.copyOf(milk,milk.length);
-		int rst=minMalted(from+1,milkTmp,isHappyTmp);
-		
-		//MALTED
-		if(maymalted){
-			int[] milkMal=Array.copyOf(milk,milk.length);
-			milkMal[from]=1;
-			boolean isHappyMal[]=Array.copyOf(isHappy,isHappy.length);
-			//ask every customer if become happy
-			for(int i=0;i<isHappy.length;i++){
-				if(!isHappy[i]&&choice[from][i]==1){
-					isHappyMal[i]=true;
-				}
-			}
-			int rstMal=minMalted(from+1,milkMal,isHappyMal);
-			rst=rst<rstMal?rst:rstMal;
-		}
-		
 		return rst;	
-		
 	}
+
+	private ArrayList<Customer> copyCtms(ArrayList<Customer> ctms){
+		ArrayList<Customer> tmp=new ArrayList<Customer>();
+		for(int i=0;i<ctms.size();i++){
+			tmp.add(ctms.get(i).getCopy());
+		}
+		return tmp;
+	}
+
+	class Customer{
+		HashSet<Integer> want;
+		
+		public Customer(){
+			this.want=new HashSet<>();
+		}
+
+		public Customer getCopy(){
+			Customer tmp=new Customer();
+			tmp.want=this.want;
+			return tmp;
+		}
+
+		void want(int milk){
+			want.add(milk);
+		}
+
+		boolean drink(int milk){
+			if(want.contains(milk)){
+				want.clear();
+			}
+			return want.isEmpty();
+		}
+		
+		boolean hasMilk(){
+			return want.isEmpty();
+		}	
+	}	
 
 	public static void main(String[] args) throws IOException {
 		Locale.setDefault(Locale.US);
