@@ -1,36 +1,46 @@
+import java.util.*;
 
 class Solution {
+	private HashMap<String,Boolean> map=new HashMap();
+	
 	public int minCut(String s) {
+		//System.out.println(s);
+		if(s==null) return 0;
 		int len=s.length();
-		int i=-1;
-		boolean isValidL=false, isValidR=false;
+		if(len<=1 || isPalindrome(s)) return 0;
+		
+		int[] cuts=new int[len];
+		Arrays.fill(cuts,len-1);
+		for(int i=len-1;i>=0;i--){
+			//System.out.println("*"+i);
+			for(int j=i+1;j<=len;j++){
+				if(isPalindrome(s.substring(i,j))){
+					if(j==len){
+						cuts[i]=0;
+					}else{
+						int tmp=1+cuts[j];
+						cuts[i]=cuts[i]<tmp?cuts[i]:tmp;
+						//System.out.println("i="+i+" j="+j);
+					}
 
-		while(i<len && !isValidL && !isValidR ){
-			i++;
-			isValidL=isPalindrome(s.substring(0,len-i));
-			isValidR=isPalindrome(s.substring(i,len));
+				}
+			}
 		}
-
-		if(i==0) return 0;
-		int min=len-1
-		if(isValidL){
-			min=1+minCut(s.substring(len-i,len));
-		}
-
-		if(isValidR){
-			int tmp=1+minCut(s.substring(0,i));
-			min=min<tmp?min:tmp;
-		}
-
-		return min;
-
+		
+		//for(int i=0;i<len;i++) System.out.print(" "+cuts[i]+",");
+		return cuts[0];	
 	}
 
 	private boolean isPalindrome(String str){
+		if(map.containsKey(str)) return map.get(str);
 		int len=str.length();
 		for(int i=0;i<(len-i-1);i++){
-			if( str.charAt(i)!=str.charAt(len-i-1) ) return false;
+			if( str.charAt(i)!=str.charAt(len-i-1) ) {
+				map.put(str,false);
+				return false;
+			}
 		}
+		map.put(str,true);
 		return true;
 	}
 }
