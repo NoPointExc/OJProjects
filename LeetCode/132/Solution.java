@@ -13,16 +13,15 @@ class Solution {
 		Arrays.fill(cuts,len-1);
 		for(int i=len-1;i>=0;i--){
 			//System.out.println("*"+i);
+			if(isPalindrome(s.substring(i))){
+				cuts[i]=0;
+				continue;
+			}
 			for(int j=i+1;j<=len;j++){
-				if(isPalindrome(s.substring(i,j))){
-					if(j==len){
-						cuts[i]=0;
-					}else{
-						int tmp=1+cuts[j];
-						cuts[i]=cuts[i]<tmp?cuts[i]:tmp;
-						//System.out.println("i="+i+" j="+j);
-					}
-
+				if(j!=len && cuts[j]+1<cuts[i] && isPalindrome(s.substring(i,j))){
+					int tmp=1+cuts[j];
+					cuts[i]=cuts[i]<tmp?cuts[i]:tmp;
+					//System.out.println("i="+i+" j="+j);
 				}
 			}
 		}
