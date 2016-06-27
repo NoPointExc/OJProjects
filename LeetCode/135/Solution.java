@@ -8,11 +8,14 @@ public class Solution {
     	for(int i:ratings) minNum=minNum<i?minNum:i;
     	for(int i=0;i<len;i++) ratings[i]-= (minNum-1);
     	boolean todo=true;
-    	while(todo){
-	    	for(int i:ratings){
-	    		System.out.print(i+"  ,");   		
-	    	}	
-	    	System.out.println();
+    	boolean last=true;
+    	while(todo || last){
+    		if(!todo) last=false;
+	    	
+	    	// for(int i:ratings){
+	    	// 	System.out.print(i+"  ,");   		
+	    	// }	
+	    	// System.out.println();
 
     		todo=false;
     		
@@ -21,9 +24,11 @@ public class Solution {
     			int fr=i, to=i+1;
     			int max=-1;
     			int min=-1;
-    			while(to<len && ratings[to]==ratings[i]){
+    			
+    			while( last &&to<len && ratings[to]==ratings[i]){
     				to++;
     			}
+
     			//flash num between fr..to
     			if(fr-1>=0){
     				min=ratings[fr-1];
@@ -40,11 +45,12 @@ public class Solution {
     				break;
     			}
     			
-    			if(ratings[i]<min && ratings[i]!=1){
+    			if(ratings[i]<=min && ratings[i]!=1){
     				//less than left & right
     				todo=true;
     				for(int j=fr;j<to;j++) ratings[j]=1;
-    			}else if(ratings[i]>min+1 && ratings[i]<max){
+    			}else if(ratings[i]>min+1 && ratings[i]<=max){
+    				//in the mid
     				todo=true;
     				for(int j=fr;j<to;j++) ratings[j]=min+1;
     			}else if(ratings[i]>max+1){
