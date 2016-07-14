@@ -1,6 +1,8 @@
+import java.lang.System;
 import java.util.*;
 
 public class Palindromic{
+
 	public char[] getLongest(char[] in){
 		if(in==null) return null;
 		if(in.length==0) return new char[0];
@@ -11,12 +13,12 @@ public class Palindromic{
 
 		while( i<str.length && c+R[c]<str.length){
 			if(i<c+R[c]){
-				if(2*c-i-R[2*c-i]==c-R[c]){
+				if(i+R[2*c-i]==c+R[c]){
 					//cut
 					R[i]=R[2*c-i];
 					c=i;
-					i=c+R[c];
-				}else if(2*c-i-R[2*c-i]>c-R[c]){
+					//i=c+R[c];
+				}else if(i+R[2*c-i]<c+R[c]){
 					//inner
 					R[i]=R[2*c-i];
 					i++;
@@ -26,29 +28,36 @@ public class Palindromic{
 					i++;
 				}
 			}else{
-				c=i;
-				i++;
-				while(i<R.length && c+R[c]+1<str.length && c-R[c]-1>0 && str[c+R[c]+1]==str[c-R[c]-1]){
+				while( c+R[c]+1<str.length && c-R[c]-1>=0 && str[c+R[c]+1]==str[c-R[c]-1]){
 					//System.out.println("[i]="+i+"tmp="+R[c]);
 					R[c]++;
 				}
+				c=i;
+				i++;
+
 			}
 		}
 
 		for(int n=0;n<R.length;n++){
 			max=R[n]>R[max]?n:max;
 		}
-		
+
+		//System.out.println("max="+max);
 		char[] ans=new char[R[max]];
+		int count=0;
 		for(int n=max-R[max];n<=max+R[max];n++){
-			//if(n%2==1) ans[(n-(max-R[max]))/2]=str[n];
+			if(n%2==1) {
+				ans[count++]=str[n];
+			}
 		}
-		
-		for(char n:str) System.out.print(n+" ");
-		System.out.println();
-			
-		for(int n:R) System.out.print(n+" ");
-		System.out.println();
+
+//		for (char n : str) System.out.print(n + " ");
+//			System.out.println();
+//
+//		for (int n : R) System.out.print(n + " ");
+//			System.out.println();
+
+
 		return ans;
 	}
 	
@@ -65,6 +74,7 @@ public class Palindromic{
 	public static void main(String[] args){
 		Palindromic s=new Palindromic();
 		char[] str="abcdefedefedcbbabc".toCharArray();
+		//char[] str="bbb".toCharArray();
 		//char[] str="".toCharArray();
 		char[] ans=s.getLongest(str);
 		//char[] ans=s.preInsert(str);
