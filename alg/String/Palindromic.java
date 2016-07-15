@@ -3,7 +3,54 @@ import java.util.*;
 
 public class Palindromic{
 
-	public char[] getLongest(char[] in){
+	//consider the mirror palindromic inside a palindromic
+        //case 0: inner mirror cut with range
+        //case 1: inner mirror inside the range
+        //case 3: inner mirror out the range 
+         
+        public char[] getLongest2(char[] in){
+            if(in==null || in.length==0) return in;
+            char[] str=preInsert(in);
+            int c=0,r=1,max=0;
+            int R[]=new int[str.length];
+            Arrays.fill(R,0);
+            
+            while(c+r<str.length){
+                while(c-R[c]-1>=0 && c+R[c]+1<str.length && c+R[c]+1==c-R[c]-1){
+                    R[c]++;
+                }
+                if(R[c]>R[max]) max=c;
+
+                if(r<=R[c]){
+                    if(r+R[c-r]<R[c]){
+                        R[c+r]=R[c-r];
+                        r++;
+                    }else if(r+R[c-r]>R[c]){
+                        R[c+r]=R[c]-r;
+                        r++;    
+                    }else{
+                        R[c+r]=R[c-r];
+                        int tmp=R[c-r];
+                        c=c+r;
+                        r=tmp+1;
+                    }
+                }else{
+                    c=c+r+1;
+                }
+            }
+            
+
+		for (char n : str) System.out.print(n + " ");
+			System.out.println();
+
+		for (int n : R) System.out.print(n + " ");
+			System.out.println();
+
+            return str;            
+         
+        }
+        
+        public char[] getLongest(char[] in){
 		if(in==null) return null;
 		if(in.length==0) return new char[0];
 		char[] str=preInsert(in);
@@ -76,7 +123,7 @@ public class Palindromic{
 		char[] str="abcdefedefedcbbabc".toCharArray();
 		//char[] str="bbb".toCharArray();
 		//char[] str="".toCharArray();
-		char[] ans=s.getLongest(str);
+		char[] ans=s.getLongest2(str);
 		//char[] ans=s.preInsert(str);
 		for(char c:ans) System.out.print(c+" ");
 		System.out.println();
