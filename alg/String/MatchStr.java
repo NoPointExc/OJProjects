@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class SearchSubstring{
+public class MatchStr{
 
 	//Z
 	//Time O(m+n)
@@ -8,41 +8,43 @@ public class SearchSubstring{
 	private int[] getZArr(char[] str, char[] pattern){
 		int len=str.length+pattern.length+1;
 		char[] arr=new char[len];
-		for(int i=0;i<str.length;i++) arr[i]=str[i];
-		arr[str.length]='$';
-		for(int i=0;i<pattern.length;i++) arr[i+str.length+1]=pattern[i]; 
-	
+		for(int i=0;i<pattern.length;i++) arr[i]=pattern[i];
+		arr[pattern.length]='$';
+		//for(int i=0;i<str.length;i++) arr[i+pattern.length+1]=str[i]; 
+                //for(char c:arr) System.out.print(c);
+                System.out.println();	
 		int[] lens=new int[len];
-		int k=0;
-		int i=1;
-		
+		lens[0]=0;
+                int k=1;
 		while(k<len){
-			System.out.println(k);
 			//i starting from k(substring), reach the max matched prefix
-			while(k+i<len && arr[i]==arr[k+i]){
+			int i=0;
+                        while(k+i<len && arr[i]==arr[k+i]){
 				i++;
 			}
 			lens[k]=i;
-			//search between k<--->k+i
-			int j=k+1;
-			while(j<k+i){
-				if(lens[j-k]<k+i){
-					lens[j]=lens[j-k];
+			//search between k<--->k+j
+			int j=1;
+                        while(j<lens[k]){
+				if(lens[j]<lens[k]){
+                                	lens[k+j]=lens[j];
 					j++;
 				}else{
-					k=k+i;
-					i=lens[i]+1;
-					break;
+					k=j;
+					i=lens[j];
+					j=1;
+                                        i=0;
+                                        break;
 				}
 			}
-			k++;
+                        k++;
 		}
 				
 		return lens;
 	}
 
-	public List<Integer> zSearch(char[] str, char[] pattern){
-		List<Integer> lst=new LinkedList();
+	public List<Integer> zMatch(char[] str, char[] pattern){
+		List<Integer> lst=new LinkedList<Integer>();
 		int[] arr=getZArr(str,pattern);
 		int len=pattern.length;
 		for(int i=0;i<arr.length;i++){
@@ -56,7 +58,7 @@ public class SearchSubstring{
 	//KMP 
 	//Time O(m+n)
 	//use the symmetry of pattern to reduce track back.
-	private int[] getTmpArr(char[] pattern){
+	private int[] getKMPArr(char[] pattern){
 		int len=pattern.length;
 		int[] lps=new int[len];
 
@@ -79,8 +81,8 @@ public class SearchSubstring{
 		return lps;
 	}
 
-	public boolean kmp(char[] str, char[] pattern){
-		int[] lps=getTmpArr(pattern);
+	public boolean kmpMatch(char[] str, char[] pattern){
+		int[] lps=getKMPArr(pattern);
 		
 		int i=0,j=0;
 		while(i<str.length && j<pattern.length){
@@ -101,12 +103,14 @@ public class SearchSubstring{
 
 	public static void main(String[] args){
 		SearchSubstring s=new SearchSubstring();
-		char[] str="colacolegoogle".toCharArray();
+		char[] str="golagolegooglegogoo".toCharArray();
 		char[] pattern="goo".toCharArray();
 		//int[] lps=s.getTmpArr(str);
-		int[] lps=s.getZArr(str,pattern);	
-		for(int i:lps) System.out.print(i+" ");
-		//boolean rst=s.kmp(str,pattern);
+		//int[] lps=s.getZArr(str,pattern);	
+		List<Integer> lst=s.zMatch(str,pattern);
+                for(int i:lst) System.out.print(i+" ");
+		System.out.println();
+                //boolean rst=s.kmp(str,pattern);
 		//System.out.println(rst);
 	}
 
