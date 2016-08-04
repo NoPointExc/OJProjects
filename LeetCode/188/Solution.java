@@ -1,4 +1,13 @@
 public class Solution {
+
+/**
+ * dp[i, j] represents the max profit up until prices[j] using at most i transactions. 
+ * dp[i, j] = max(dp[i, j-1], prices[j] - prices[jj] + dp[i-1, jj]) { jj in range of [0, j-1] }
+ *          = max(dp[i, j-1], prices[j] + max(dp[i-1, jj] - prices[jj]))
+ * dp[0, j] = 0; 0 transactions makes 0 profit
+ * dp[i, 0] = 0; if there is only one price data point you can't make any transaction.
+ */
+
     public int maxProfit(int k, int[] prices) {
         int len = prices.length;
         if (k >= len / 2) return quickSolve(prices);
@@ -10,6 +19,13 @@ public class Solution {
                 t[i][j] = Math.max(t[i][j - 1], prices[j] + tmpMax);
                 tmpMax =  Math.max(tmpMax, t[i - 1][j - 1] - prices[j]);
             }
+        }
+
+        for(int i=0;i<=k;i++){
+        	for(int j=0;j<len;j++){
+        		System.out.print(t[i][j]+" ");
+        	}
+        	System.out.println();
         }
         return t[k][len - 1];
     }
