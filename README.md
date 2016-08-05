@@ -22,7 +22,9 @@ OJProjects
   [152. Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)  
   [174. Dungeon Game](https://leetcode.com/problems/dungeon-game/)  
   [188. Best Time to Buy and Sell Stock IV \*](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)  
-  [198. House Robber\*](https://leetcode.com/problems/house-robber/)  
+  [198. House Robber\*](https://leetcode.com/problems/house-robber/)   
+  [213. House Robber II](https://leetcode.com/problems/house-robber-ii/)  
+  [221. Maximal Square](https://leetcode.com/problems/maximal-square/)  
 - [codeJam](https://code.google.com/codejam/apactest) Mostly in Java  
 /zyg  : zygote for code files/folder fast create.    
 /init.sh:   Linux Bash script for for fast create.    
