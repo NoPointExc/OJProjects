@@ -24,7 +24,8 @@ OJProjects
   [188. Best Time to Buy and Sell Stock IV \*](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)  
   [198. House Robber\*](https://leetcode.com/problems/house-robber/)   
   [213. House Robber II](https://leetcode.com/problems/house-robber-ii/)  
-  [221. Maximal Square](https://leetcode.com/problems/maximal-square/)  
+  [221. Maximal Square](https://leetcode.com/problems/maximal-square/) 
+  [264. Ugly Number II](https://leetcode.com/problems/ugly-number-ii/)  
 
   Tree
   [314. Binary Tree Vertical Order Traversal. fb](http://leetcode.com/problems/binary-tree-vertical-order-traversal/)
