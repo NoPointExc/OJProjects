@@ -3,6 +3,7 @@ OJProjects
 
 - [LeetCode](https://leetcode.com/) Most in Java, partly in C and Ruby  
   Dynamic Programming  
+  [44. Wildcard Matching](https://leetcode.com/problems/wildcard-matching/)
   [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/)    
   [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)   
   [72 Edit Distance hard](https://leetcode.com/problems/edit-distance/)   
