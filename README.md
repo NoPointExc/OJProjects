@@ -31,7 +31,10 @@ OJProjects
   Tree
   [314. Binary Tree Vertical Order Traversal. fb](http://leetcode.com/problems/binary-tree-vertical-order-traversal/)
   [235. Lowest Common Ancestor of a Binary Search Tree.fb](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
-- [codeJam](https://code.google.com/codejam/apactest) Mostly in Java  
+- [codeJam](https://code.google.com/codejam/apactest) Mostly in Java 
+
+  BackTracking/DFS
+  [46. Permutations](https://leetcode.com/problems/permutations/)
 /zyg  : zygote for code files/folder fast create.    
 /init.sh:   Linux Bash script for for fast create.    
 `. ./init.sh [round_name]`  
