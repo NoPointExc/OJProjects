@@ -35,6 +35,8 @@ OJProjects
 
   BackTracking/DFS
   [46. Permutations](https://leetcode.com/problems/permutations/)
+  [47. Permutations II](https://leetcode.com/problems/permutations-ii/)  
+
 /zyg  : zygote for code files/folder fast create.    
 /init.sh:   Linux Bash script for for fast create.    
 `. ./init.sh [round_name]`  
