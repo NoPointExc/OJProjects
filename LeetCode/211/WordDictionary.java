@@ -26,29 +26,27 @@ public class WordDictionary {
         word=word+'0';
         LinkedList<TrieNode> queue=new LinkedList<TrieNode>();
         queue.offer(root);
-        int matched=0;
-        int toTest=0;
 
         for(int i=0;i<word.length();i++){
             int size=queue.size();
             if(size==0) return false;
+            
             while(size-->0){
                 TrieNode p=queue.poll();
-
                 if(word.charAt(i)=='.'){
+                    if(i==word.length()-1) return true;
                     queue.addAll(p.next.values()); 
                 }else{
                     TrieNode next=p.next.get(word.charAt(i));
-                    if(next==null)
-                        return false;
-                    else
+                    if(next!=null){
+                        if(i==word.length()-1) return true;
                         queue.offer(next);
+                    }
                 }     
             }
-
         }
 
-        return true;
+        return false;
     }
 
     class TrieNode {                                               
