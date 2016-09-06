@@ -41,20 +41,26 @@ public class Solution{
 	}
 
 	public void sort(String[] names){
-		NameComparator<String> comparator = new NameComparator<>();
-		return Arrays.sort(names,comparator);
+		NameComparator comparator = new NameComparator();
+		Arrays.sort(names,comparator);
 	}
 
 	class NameComparator implements Comparator<String>{
-		int compare(String name1, String name2){
+		
+		@Override
+		public int compare(String name1, String name2){
 			int rst = 0;
-			String[] arr1 = name1.splite(" ");
-			String[] arr2 = name2.splite(" ");
-			if(Integer.valueOf(arr1[1])==Integer.valueOf(arr2(1)) ){
+			String[] arr1 = name1.split(" ");
+			String[] arr2 = name2.split(" ");
+			int num1 = romanToInt(arr1[1]);
+			int num2 = romanToInt(arr2[1]);
+			String n1 = arr1[0];
+			String n2 = arr2[0];
+			
+			if(Integer.valueOf( num1 )==Integer.valueOf( num2 ) ){
 				//compare name
 				int i = 0;
-				String n1 = arr1[0];
-				String n2 = arr2[0];
+				
 				while(i<n1.length() && i<n2.length() && n1.charAt(i) == n2.charAt(i)){
 					i++;
 				}
@@ -67,7 +73,7 @@ public class Solution{
 					return 1;
 				return n1.charAt(i)-n2.charAt(i);
 			}else{
-				rst =Integer.valueOf(arr1[1]) - Integer.valueOf(arr2(1));  	
+				rst =Integer.valueOf(num1) - Integer.valueOf(num2);  	
 			}
 
 			return rst;
@@ -75,15 +81,17 @@ public class Solution{
 	}
 
 	public static void main(String[] args){
-		int len = Integer.parseInt(args[0]);
-		String[] names = new String[len];
-		for(int i=0;i<len;i++)
-			names[i] = args[i+1];
+		//int len = Integer.parseInt(args[0]);
+		//String[] names = new String[len];
+		//for(int i=0;i<len;i++)
+			//names[i] = args[i+1];
 
+		String[] names = {"abc XI","abc IX","abcd XI","ab XI","defgh CMIX","adfsafd CMIX","adsadf MCMXIX"};
+		
 		Solution solution = new Solution();
-		String[] rst = solution.sort(names);
+		solution.sort(names);
 
-		for(String s:rst)
+		for(String s:names)
 			System.out.println(s);
 	}
 
