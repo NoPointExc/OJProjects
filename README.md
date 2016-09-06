@@ -38,6 +38,10 @@ OJProjects
   [46. Permutations](https://leetcode.com/problems/permutations/)
   [47. Permutations II](https://leetcode.com/problems/permutations-ii/)  
   [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/)
+
+  String
+  [13. Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
+
 /zyg  : zygote for code files/folder fast create.    
 /init.sh:   Linux Bash script for for fast create.    
 `. ./init.sh [round_name]`  
