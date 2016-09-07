@@ -30,20 +30,18 @@ OJProjects
   [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/)
 
   Tree
-  [314. Binary Tree Vertical Order Traversal. fb](http://leetcode.com/problems/binary-tree-vertical-order-traversal/)
-  [235. Lowest Common Ancestor of a Binary Search Tree.fb](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
-- [codeJam](https://code.google.com/codejam/apactest) Mostly in Java 
+  [314. Binary Tree Vertical Order Traversal. fb](http://leetcode.com/problems/binary-tree-vertical-order-traversal/)  
+  [235. Lowest Common Ancestor of a Binary Search Tree.fb](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)  
 
   BackTracking/DFS
-  [46. Permutations](https://leetcode.com/problems/permutations/)
-  [47. Permutations II](https://leetcode.com/problems/permutations-ii/)  
-  [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/)
+  [46. Permutations](https://leetcode.com/problems/permutations/)  
+  [47. Permutations II](https://leetcode.com/problems/permutations-ii/)    
+  [216. Combination Sum III](https://leetcode.com/problems/combination-sum-iii/)  
 
   String
   [13. Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
 
-/zyg  : zygote for code files/folder fast create.    
-/init.sh:   Linux Bash script for for fast create.    
-`. ./init.sh [round_name]`  
-/tmp: unused template and scripts.    
+  Queue
+  [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)  
+
 
