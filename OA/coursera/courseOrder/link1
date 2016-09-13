@@ -1,3 +1,0 @@
-http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=200414&page=1#pid2524079
-
-第一题的输入是 一门课的launch date、几周上一次课、学生enroll日期；返回值是第一个可以参加的session的开始日期；
