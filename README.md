@@ -40,6 +40,7 @@ OJProjects
 
   String  
   [13. Roman to Integer](https://leetcode.com/problems/roman-to-integer/)
+  [281 Zigzag Iterator](https://leetcode.com/problems/zigzag-iterator)  
 
   Queue  
   [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)  
