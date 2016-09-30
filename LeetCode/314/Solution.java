@@ -68,6 +68,9 @@ public class Solution {
     
     public List<List<Integer>> verticalOrder(TreeNode root) {    
         List<List<Integer>> rst = new ArrayList<List<Integer>>();
+        if( root == null){
+            return rst;
+        }
         int max=0, min=0;
         HashMap<Integer,List<Integer>> map=new HashMap<Integer,List<Integer>>();
         
