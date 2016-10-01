@@ -31,7 +31,8 @@ OJProjects
 
   Tree  
   [314. Binary Tree Vertical Order Traversal. fb](http://leetcode.com/problems/binary-tree-vertical-order-traversal/)  
-  [235. Lowest Common Ancestor of a Binary Search Tree.fb](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)  
+  [235. Lowest Common Ancestor of a Binary Search Tree.fb](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) 
+  [285. Inorder Successor in BST](https://leetcode.com/problems/inorder-successor-in-bst/) 
 
   BackTracking/DFS  
   [46. Permutations](https://leetcode.com/problems/permutations/)  
