@@ -1,32 +1,29 @@
 public class Solution {
+    
     public boolean isMatch(String s, String p) {
-        int len=s.length();
-        int wid=p.length();
-
-        boolean[][] map=new boolean[wid+1][len+1];
-        map[0][0]=true;
-        for(int i=1;i<=len;i++)
-        	map[0][i]=map[0][i-1] && s.charAt(i-1)=='*';
-        for(int i=1;i<=wid;i++)
-        	map[i][0]=map[i-1][0] && p.charAt(i-1)=='*';
-        
-
-        for(int i=1;i<=wid;i++){
-        	for(int j=1;j<=len;j++){
-        		if(isEqual(p.charAt(i-1),s.charAt(j-1)) && map[i-1][j-1])
-        			map[i][j]=true;
-        		else if(map[i][j-1] && (s.charAt(j-1)=='*' || p.charAt(i-1)=='*' ) )
-        			map[i][j]=true;
-        		else if(map[i-1][j] &&(p.charAt(i-1)=='*' || s.charAt(j-1)=='*' ) )
-        			map[i][j]=true;
-        		else map[i][j]=false;
-        	}
+        if(s == null || p == null){
+            return s == p;
         }
-
-        return map[wid][len];
+        
+        boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
+        dp[0][0] = true;
+        for(int i = 1; i <= p.length(); i++){
+            dp[0][i] = dp[0][i - 1] && p.charAt(i - 1) == '*';             
+        }
+        
+        for(int i = 1; i <= s.length(); i++){
+            for(int j = 1; j <= p.length(); j++){
+                if(s.charAt(i - 1) == p.charAt(j - 1)){
+                    dp[i][j] = dp[i - 1][j - 1];
+                }else if(p.charAt(j - 1) == '?'){
+                    dp[i][j] = dp[i - 1][j -1];
+                }else if(p.charAt(j - 1) == '*'){
+                    dp[i][j] = dp[i - 1][j -1] || dp[i][j - 1] || dp[i - 1][j];
+                }        
+            }
+        }
+        
+        return dp[s.length()][p.length()];
     }
-
-    private boolean isEqual(char a1,char a2){
-    	return a1=='*'||a2=='*'||a1=='?'||a2=='?'||a1==a2;
-    }
+    
 }
