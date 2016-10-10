@@ -1,53 +1,39 @@
-import java.util.*;
-
 public class ZigzagIterator {
-    Iterator<Integer> it1;
-    Iterator<Integer> it2;
-    int turns;
-
+    int count1 = 0, count2 = 0;
+    List<Integer> v1, v2;
+    Iterator<Integer> it1, it2;
+    
     public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
-	this.it1 = v1.iterator();
-	this.it2 = v2.iterator();
-	turns = 0;
+        this.v1 = v1;
+        this.v2 = v2;
+        it1 = v1 != null ? v1.iterator() : null;
+        it2 = v2 != null ? v2.iterator() : null;
     }
 
-    public int next(){
-	int rst = -1;
-	
-	if(turns ==0 && it1.hasNext()){
-	    rst = it1.next();
-	}else if( it2.hasNext() ){
-	    rst = it2.next();
-	}else{
-	    //should throws a exception here
-	    rst = -1;
-	}
-
-	turns = 1 - turns;
-	return rst;
+    public int next() {
+        if(v1 == null || count1 == v1.size()){
+            count2++;
+            return it2.next();
+        }
+        if(v2 == null || count2 == v2.size()){
+            count1++;
+            return it1.next();
+        }
+        if(count1 <= count2){
+            count1++;
+            return it1.next();
+        }
+        count2++;
+        return it2.next();   
     }
 
-    public boolean hasNext(){
-	return it1.hasNext() || it2.hasNext();
-    }
-
-    public static void main(String[] args){
-	List<Integer> it1 = new ArrayList<>();
-	List<Integer> it2 = new ArrayList<>();
-	
-	//for(int i=0;i<10;i++){
-	//    it1.add(2*i);
-	//    it2.add(2*i+1);
-	//}
-	
-	it2.add(100);
-	it2.add(10000);
-
-	ZigzagIterator  zig = new ZigzagIterator(it1,it2);
-	
-	while( zig.hasNext() ){
-	    System.out.print(zig.next()+" ");
-	}
-	System.out.println();
+    public boolean hasNext() {
+        return (count1 + count2) < (v1.size() + v2.size()); 
     }
 }
+
+/**
+ * Your ZigzagIterator object will be instantiated and called as such:
+ * ZigzagIterator i = new ZigzagIterator(v1, v2);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
