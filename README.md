@@ -53,3 +53,11 @@ OJProjects
   [54. Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)  
   [59. Spiral Matrix II](https://leetcode.com/problems/spiral-matrix-ii/)  
 
+  Segment Tree. 
+  see also [here](https://github.com/mission-peace/interview/blob/master/src/com/interview/tree/SegmentTreeMinimumRangeQuery.java)  
+  [308. Range Sum Query 2D - Mutable](https://leetcode.com/problems/range-sum-query-2d-mutable/)  
+
+  Bit-Operation  
+  [318. Maximum Product of Word Lengths](https://leetcode.com/problems/maximum-product-of-word-lengths/)   
+
+
