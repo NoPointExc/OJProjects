@@ -59,5 +59,5 @@ OJProjects
 
   Bit-Operation  
   [318. Maximum Product of Word Lengths](https://leetcode.com/problems/maximum-product-of-word-lengths/)   
-
+  [393. UTF-8 Validation](https://leetcode.com/problems/utf-8-validation/)   
 
